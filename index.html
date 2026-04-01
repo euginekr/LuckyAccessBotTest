@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>LuckyAccess Club</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -30,22 +31,22 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 
 .hdr-av img{width:100%;height:100%;object-fit:cover}
 
-.stories{padding:10px 16px 2px;overflow:hidden}
-.stories-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.stories{padding:10px 0 2px;overflow:hidden}
+.stories-scroll{display:flex;gap:6px;overflow-x:auto;padding:0 16px 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:center}
 .stories-scroll::-webkit-scrollbar{display:none}
-.story-item{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:62px;cursor:pointer}
-.story-ring{width:54px;height:54px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#00e676,#42a5f5)}
+.story-item{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:68px;cursor:pointer}
+.story-ring{width:62px;height:62px;border-radius:50%;padding:2.5px;background:linear-gradient(135deg,#00e676,#42a5f5)}
 .story-ring.gold{background:linear-gradient(135deg,#ffab40,#ff5252)}
 .story-ring.purple{background:linear-gradient(135deg,#b388ff,#7c4dff)}
 .story-ring.blue{background:linear-gradient(135deg,#42a5f5,#1565c0)}
 .story-ring.seen{background:rgba(255,255,255,0.12)}
-.story-inner{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #131926;font-size:20px}
+.story-inner{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid #131926;font-size:23px}
 .story-inner.g1{background:linear-gradient(135deg,#1b5e20,#004d40)}
 .story-inner.g2{background:linear-gradient(135deg,#b71c1c,#880e4f)}
 .story-inner.g3{background:linear-gradient(135deg,#4a148c,#283593)}
 .story-inner.g4{background:linear-gradient(135deg,#0d47a1,#1a237e)}
 .story-inner.g5{background:linear-gradient(135deg,#263238,#37474f)}
-.story-label{font-size:10px;color:#9fa8c7;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62px;text-align:center}
+.story-label{font-size:10.5px;color:#9fa8c7;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:68px;text-align:center}
 .story-item.seen .story-label{color:#5c6688}
 
 .promo{margin:12px 16px;position:relative;overflow:hidden;border-radius:16px;height:105px}
@@ -190,16 +191,17 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .cab-support-btn:active{border-color:rgba(107,181,255,0.3);color:#e8eaf6}
 
 /* Cabinet items - grid layout */
-.cab-actions{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.cab-actions{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .cab-action{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px;background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.12);border-radius:14px;cursor:pointer;position:relative}
 .cab-action:nth-child(2){background:rgba(255,171,64,0.06);border-color:rgba(255,171,64,0.12)}
+.cab-action-purple{background:rgba(179,136,255,0.06);border-color:rgba(179,136,255,0.12)}
 .cab-action-ico{font-size:22px;flex-shrink:0}
 .cab-action-txt{font-size:15px;font-weight:700;color:#00e676}
 .cab-action:nth-child(2) .cab-action-txt{color:#ffab40}
 .cab-action-arr{color:#5c6688;font-size:17px;position:absolute;right:16px;font-weight:700}
 
 .cab-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-.cab-grid-item{display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#1f2b45;border-radius:14px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;text-align:center;gap:6px;transition:border-color 0.15s}
+.cab-grid-item{display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:transparent;border-radius:14px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;text-align:center;gap:6px;transition:border-color 0.15s}
 .cab-grid-item:active{border-color:rgba(255,255,255,0.15)}
 .cab-grid-ico{font-size:26px}
 .cab-grid-nm{font-size:14px;font-weight:700;line-height:1.2}
@@ -352,7 +354,7 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .app-support-btn svg{color:#6bb5ff}
 
 /* === Cabinet Balance Cards === */
-.cab-bal-cards{display:flex;gap:8px;padding:8px 0 16px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:16px}
+.cab-bal-cards{display:flex;gap:8px;padding:8px 0 10px;margin-bottom:0}
 .cab-bal-card{flex:1;background:#1f2b45;border-radius:14px;border:1px solid rgba(255,255,255,0.06);padding:14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:border-color 0.2s}
 .cab-bal-card:active{border-color:rgba(0,230,118,0.2)}
 .cab-bal-card-ico{width:32px;height:32px;flex-shrink:0}
@@ -371,14 +373,45 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .bp-amount small{font-size:17px;font-weight:600;color:rgba(0,230,118,0.5)}
 .bp-topup-btn{display:flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,#00e676,#00c853);color:#131926;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform 0.15s;flex-shrink:0}
 .bp-topup-btn:active{transform:scale(0.96)}
-.bp-stats{display:flex;gap:1px;background:rgba(255,255,255,0.04);border-radius:12px;overflow:hidden;margin-top:14px}
-.bp-stat{flex:1;padding:10px 8px;text-align:center;background:#1a2540}
-.bp-stat-l{font-size:11px;color:#5c6688;margin-bottom:3px;font-weight:600}
-.bp-stat-v{font-size:17px;font-weight:800}
+.bp-stats{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.bp-stat{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:12px}
+.bp-stat-l{font-size:13px;color:#9fa8c7;font-weight:600}
+.bp-stat-v{font-size:16px;font-weight:800}
 .bp-tabs{display:flex;gap:0;background:rgba(255,255,255,0.04);border-radius:12px;overflow:hidden;margin-bottom:12px}
 .bp-tab{flex:1;padding:11px;text-align:center;font-size:14px;font-weight:700;color:#5c6688;cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent}
 .bp-tab.on{color:#00e676;border-bottom-color:#00e676;background:rgba(0,230,118,0.04)}
 .tx-empty{text-align:center;padding:24px;color:#5c6688}
+.bb-hero{background:linear-gradient(135deg,#2a2010,#302418 50%,#281e28);border-radius:18px;padding:18px;border:1px solid rgba(255,171,64,0.15);margin-bottom:16px;position:relative;overflow:hidden}
+.bb-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,171,64,0.1) 0%,transparent 70%);pointer-events:none}
+.bb-label{font-size:13px;color:#9fa8c7;font-weight:600;letter-spacing:0.3px;margin-bottom:6px}
+.bb-amount{font-size:40px;font-weight:800;color:#ffab40;letter-spacing:-0.5px;line-height:1}
+.bb-amount small{font-size:17px;font-weight:600;color:rgba(255,171,64,0.5)}
+.bb-stats{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.bb-stat{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:12px}
+.bb-stat-l{font-size:13px;color:#9fa8c7;font-weight:600}
+.bb-stat-v{font-size:16px;font-weight:800}
+.flip-card{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;cursor:pointer;margin-bottom:16px;transition:border-color 0.15s}
+.flip-card:active{border-color:rgba(255,255,255,0.12)}
+.flip-card-bd{flex:1}
+.flip-card-label{font-size:12px;color:#5c6688;font-weight:600}
+.flip-card-val{font-size:18px;font-weight:800;margin-top:2px}
+.flip-card-btn{font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;gap:4px}
+.flip-card.to-bonus{border-color:rgba(255,171,64,0.12)}
+.flip-card.to-bonus .flip-card-val{color:#ffab40}
+.flip-card.to-bonus .flip-card-btn{background:rgba(255,171,64,0.1);color:#ffab40}
+.flip-card.to-main{border-color:rgba(0,230,118,0.12)}
+.flip-card.to-main .flip-card-val{color:#00e676}
+.flip-card.to-main .flip-card-btn{background:rgba(0,230,118,0.1);color:#00e676}
+.bb-info-section{margin-top:8px;margin-bottom:16px}
+.bb-info-title{font-size:15px;font-weight:700;margin-bottom:10px;color:#ffab40}
+.bb-info-card{display:flex;align-items:flex-start;gap:10px;padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:12px;margin-bottom:8px}
+.bb-info-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.bb-info-bd{flex:1}
+.bb-info-nm{font-size:14px;font-weight:700;color:#e8eaf6;margin-bottom:2px}
+.bb-info-ds{font-size:12px;color:#9fa8c7;line-height:1.5}
+.bb-hero-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;background:#ffab40;border:none;border-radius:12px;color:#131926;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity 0.15s}
+.bb-hero-btn:active{opacity:0.85}
+.bb-hero-btn .gt-arr{color:#131926;font-size:12px}
 
 /* === Topup Screen === */
 .tu-sec{margin-bottom:16px}
@@ -433,12 +466,10 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .pay-addr-str{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;font-size:13px;font-family:'SF Mono',monospace;color:#9fa8c7;word-break:break-all;text-align:center;line-height:1.4;margin-bottom:8px}
 .pay-copy-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:12px;background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.15);border-radius:12px;color:#00e676;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s}
 .pay-copy-btn:active{background:rgba(0,230,118,0.15);transform:scale(0.97)}
-.pay-qr{width:170px;height:170px;background:#fff;border-radius:12px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#333;text-align:center;padding:8px}
-.pay-timer{text-align:center;margin-bottom:14px}
 .pay-timer-val{font-size:26px;font-weight:800;color:#ffab40;font-variant-numeric:tabular-nums}
-.pay-timer-label{font-size:12px;color:#5c6688;margin-top:2px}
 .pay-status{text-align:center;padding:14px;background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.12);border-radius:14px;margin-bottom:14px}
 .pay-status-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#ffab40;margin-right:8px;animation:payPulse 1.5s infinite}
+.pay-bottom-btns{margin-top:20px}
 @keyframes payPulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .pay-status-text{font-size:15px;font-weight:700;color:#e8eaf6}
 .guide-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;color:#9fa8c7;margin-bottom:8px;transition:all 0.2s}
@@ -448,8 +479,49 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .guide-body{display:none;background:#1a2540;border-radius:14px;border:1px solid rgba(255,255,255,0.06);padding:16px;margin-bottom:12px}
 .guide-body.open{display:block}
 .pay-bottom-btns{margin-top:20px}
-.pay-problem-btn{display:block;width:100%;padding:13px;background:rgba(255,171,64,0.06);border:1px solid rgba(255,171,64,0.12);border-radius:14px;color:#ffab40;font-size:14px;font-weight:700;text-align:center;cursor:pointer;font-family:inherit;margin-bottom:8px}
 .pay-cancel-btn{display:block;width:100%;padding:13px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:14px;color:#5c6688;font-size:14px;font-weight:600;text-align:center;cursor:pointer;font-family:inherit}
+.pay-status.st-wait{background:rgba(255,171,64,0.06);border-color:rgba(255,171,64,0.12)}
+.pay-status.st-wait .pay-status-dot{background:#ffab40}
+.pay-status.st-confirm{background:rgba(66,165,245,0.06);border-color:rgba(66,165,245,0.12)}
+.pay-status.st-confirm .pay-status-dot{background:#42a5f5}
+.pay-status.st-done{background:rgba(0,230,118,0.08);border-color:rgba(0,230,118,0.15)}
+.pay-status.st-done .pay-status-dot{background:#00e676;animation:none}
+.pay-status.st-fail{background:rgba(255,82,82,0.06);border-color:rgba(255,82,82,0.12)}
+.pay-status.st-fail .pay-status-dot{background:#ff5252;animation:none}
+.pay-status.st-expired{background:rgba(92,102,136,0.08);border-color:rgba(92,102,136,0.15)}
+.pay-status.st-expired .pay-status-dot{background:#5c6688;animation:none}
+.pay-loading{display:flex;align-items:center;justify-content:center;padding:60px 20px;flex-direction:column;gap:12px}
+.pay-loading-spin{width:36px;height:36px;border:3px solid rgba(255,255,255,0.08);border-top:3px solid #00e676;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pay-loading-txt{font-size:14px;color:#9fa8c7}
+.tu-terms{font-size:12px;color:#5c6688;text-align:center;margin-top:12px;line-height:1.5}
+.tu-terms a{color:#42a5f5;text-decoration:underline}
+.cab-terms{font-size:12px;color:#5c6688;text-align:center;margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04)}
+.cab-terms a{color:#42a5f5;text-decoration:underline}
+.tms-tabs{display:flex;gap:4px;margin-bottom:16px}
+.tms-tab{flex:1;padding:9px 4px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#5c6688;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center}
+.tms-tab.on{background:rgba(0,230,118,0.08);border-color:rgba(0,230,118,0.2);color:#00e676}
+.tms-date{font-size:11px;color:#5c6688;font-weight:500;margin-bottom:16px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid #00e676}
+.tms-section{margin-bottom:6px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.02)}
+.tms-sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;cursor:pointer;gap:10px;-webkit-tap-highlight-color:transparent}
+.tms-sec-hdr:active{background:rgba(255,255,255,0.03)}
+.tms-sec-num{font-size:11px;font-weight:600;color:#00e676;background:rgba(0,230,118,0.1);border-radius:6px;padding:2px 7px;flex-shrink:0}
+.tms-sec-title{font-size:13px;font-weight:700;color:#e8eaf6;flex:1}
+.tms-chev{width:16px;height:16px;flex-shrink:0;color:#5c6688;transition:transform 0.2s}
+.tms-section.open .tms-chev{transform:rotate(180deg)}
+.tms-sec-body{display:none;padding:0 14px 14px;border-top:1px solid rgba(255,255,255,0.04)}
+.tms-section.open .tms-sec-body{display:block}
+.tms-clause{padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:#9fa8c7;line-height:1.65}
+.tms-clause:last-child{border-bottom:none;padding-bottom:0}
+.tms-clause-num{font-weight:700;color:#00e676;margin-right:4px}
+.tms-bullet{margin:8px 0 4px 4px;display:flex;flex-direction:column;gap:5px}
+.tms-bullet-item{display:flex;gap:8px;font-size:13px;color:#9fa8c7;line-height:1.55}
+.tms-bullet-item:before{content:"\2014";color:#5c6688;flex-shrink:0}
+.tms-warn{margin-top:10px;padding:10px 12px;background:rgba(255,82,82,0.06);border:1px solid rgba(255,82,82,0.15);border-radius:8px;font-size:12px;color:#ff8a80;line-height:1.55}
+.tms-note{margin-top:10px;padding:10px 12px;background:rgba(0,230,118,0.05);border:1px solid rgba(0,230,118,0.12);border-radius:8px;font-size:12px;color:#69f0ae;line-height:1.55}
+.tms-contact{margin-top:16px;padding:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;text-align:center}
+.tms-contact p{font-size:12px;color:#9fa8c7;margin-bottom:10px;line-height:1.55}
+.tms-contact a{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:linear-gradient(135deg,#00c853,#00e676);border-radius:8px;color:#fff;font-size:13px;font-weight:600;text-decoration:none}
 
 /* Bottom Nav */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:#1a2236;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-around;padding:8px 0;padding-bottom:max(8px,env(safe-area-inset-bottom),var(--tg-safe-area-inset-bottom,0px));z-index:100;max-width:420px;margin:0 auto}
@@ -491,25 +563,24 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <!-- Profile horizontal -->
 <div class="cab-prof">
 <div class="cab-prof-av"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='48' cy='48' r='48' fill='%231b5e20'/%3E%3Ctext x='48' y='56' text-anchor='middle' fill='white' font-size='32' font-family='Arial' font-weight='bold'%3EEL%3C/text%3E%3C/svg%3E" alt=""></div>
-<div class="cab-prof-bd"><div class="cab-prof-welcome">Welcome to the club</div><div class="cab-prof-name">Eugene</div><div class="cab-prof-nick">@EugeneLucky</div></div>
+<div class="cab-prof-bd"><div class="cab-prof-welcome">Welcome to the club</div><div class="cab-prof-name">Eugene</div><div style="display:flex;align-items:center;gap:8px"><div class="cab-prof-nick">@EugeneLucky</div><div onclick="alert('EN / UA / RU')" style="cursor:pointer;font-size:14px;color:#5c6688;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:3px 8px;font-weight:600;display:flex;align-items:center;gap:4px">🌐 <span style="font-size:11px">RU</span></div></div></div>
 </div>
 
 <!-- Balance cards -->
 <div class="cab-bal-cards">
 <div class="cab-bal-card" onclick="openBalancePage()"><div class="cab-bal-card-ico"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="#1b5e20"/><path d="M6 13h20M8 9h16a2 2 0 012 2v10a2 2 0 01-2 2H8a2 2 0 01-2-2V11a2 2 0 012-2z" stroke="#00e676" stroke-width="1.5"/><circle cx="22" cy="18" r="1.5" fill="#00e676"/></svg></div><div class="cab-bal-card-bd"><div class="cab-bal-card-label">Основной баланс</div><div class="cab-bal-card-val" id="cabMainBal">$0.00</div></div></div>
-<div class="cab-bal-card" onclick="openBalancePage()"><div class="cab-bal-card-ico"><img id="bonusIcoCab" src="" alt=""></div><div class="cab-bal-card-bd"><div class="cab-bal-card-label">Бонусный</div><div class="cab-bal-card-val bonus" id="cabBonusBal">$0.00</div></div></div>
+<div class="cab-bal-card" onclick="openBonusBalPage()"><div class="cab-bal-card-ico"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="#5d3a00"/><path d="M13.5 7h5l.5 1-2 2h-2l-2-2 .5-1z" fill="#ffab40"/><path d="M10 15c0-2 2.5-4 6-4s6 2 6 4v5c0 3-2.7 5-6 5s-6-2-6-5v-5z" stroke="#ffab40" stroke-width="1.3" fill="none"/><text x="16" y="20.5" text-anchor="middle" fill="#ffab40" font-size="8" font-weight="bold" font-family="Arial">$</text></svg></div><div class="cab-bal-card-bd"><div class="cab-bal-card-label">Бонусный</div><div class="cab-bal-card-val bonus" id="cabBonusBal">$0.00</div></div></div>
 </div>
 
 <!-- Action buttons -->
 <div class="cab-actions">
 <div class="cab-action" onclick="openSubs()"><span class="cab-action-ico">🗂</span><span class="cab-action-txt">Мои доступы / История</span><span class="cab-action-arr">›</span></div>
 <div class="cab-action" onclick="alert('Мои покупки с Маркета')"><span class="cab-action-ico">📦</span><span class="cab-action-txt">Мои покупки с Маркета</span><span class="cab-action-arr">›</span></div>
+<div class="cab-action cab-action-purple" onclick="navTo('ref',document.querySelectorAll('.nitem')[3])"><span class="cab-action-ico">💸</span><span class="cab-action-txt" style="color:#b388ff">Пригласить друга</span><span class="cab-action-arr">›</span></div>
 </div>
 
-<!-- 4 grid buttons: invite, language, suggest, rate -->
+<!-- 2 grid buttons: suggest, rate -->
 <div class="cab-grid">
-<div class="cab-grid-item" onclick="navTo('ref',document.querySelectorAll('.nitem')[3])"><div class="cab-grid-ico">💸</div><div class="cab-grid-nm">Пригласить друга</div><div class="cab-grid-ds">Получить награду</div></div>
-<div class="cab-grid-item" onclick="alert('EN / UA / RU')"><div class="cab-grid-ico">🌐</div><div class="cab-grid-nm">Сменить язык</div><div class="cab-grid-ds">Language</div></div>
 <div class="cab-grid-item" onclick="openInner('suggest')"><div class="cab-grid-ico">💡</div><div class="cab-grid-nm">Предложить сервис</div><div class="cab-grid-ds">Новый инструмент?</div></div>
 <div class="cab-grid-item" onclick="openInner('rate')"><div class="cab-grid-ico">⭐</div><div class="cab-grid-nm">Оценить</div><div class="cab-grid-ds">Ваша обратная связь</div></div>
 </div>
@@ -536,6 +607,8 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 </button>
 </div>
 
+<div class="cab-terms"><a href="javascript:void(0)" onclick="openTerms()">Пользовательское соглашение и Политика конфиденциальности</a></div>
+
 </div></div>
 
 <!-- ======= BALANCE PAGE ======= -->
@@ -549,10 +622,16 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <button class="bp-topup-btn" onclick="openTopup()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Пополнить</button>
 </div>
 <div class="bp-stats">
-<div class="bp-stat"><div class="bp-stat-l">Пополнено</div><div class="bp-stat-v" style="color:#00e676">$0</div></div>
-<div class="bp-stat"><div class="bp-stat-l">Потрачено</div><div class="bp-stat-v" style="color:#ff5252">$0</div></div>
-<div class="bp-stat"><div class="bp-stat-l">Бонус</div><div class="bp-stat-v" style="color:#ffab40">$0</div></div>
+<div class="bp-stat"><div class="bp-stat-l">Пополнено за все время</div><div class="bp-stat-v" style="color:#00e676">$0</div></div>
+<div class="bp-stat"><div class="bp-stat-l">Потрачено за все время</div><div class="bp-stat-v" style="color:#ff5252">$0</div></div>
+<div class="bp-stat"><div class="bp-stat-l">Сэкономлено на сервисах</div><div class="bp-stat-v" style="color:#b388ff">$0</div></div>
 </div>
+</div>
+
+<!-- Mini bonus balance flip card -->
+<div class="flip-card to-bonus" onclick="openBonusBalPage()">
+<div class="flip-card-bd"><div class="flip-card-label">Бонусный баланс</div><div class="flip-card-val" id="bpBonusVal">$0.00</div></div>
+<div class="flip-card-btn">Перейти →</div>
 </div>
 
 <div class="bp-tabs">
@@ -561,6 +640,67 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 </div>
 <div id="bpTab0"><div class="tx-empty"><div style="font-size:30px;margin-bottom:6px">📭</div><div style="font-size:14px">Пополнений пока нет</div><div style="font-size:12px;margin-top:4px">Пополните баланс чтобы купить подписки</div></div></div>
 <div id="bpTab1" style="display:none"><div class="tx-empty"><div style="font-size:30px;margin-bottom:6px">🛒</div><div style="font-size:14px">Расходов пока нет</div></div></div>
+</div></div>
+
+<!-- ======= BONUS BALANCE PAGE ======= -->
+<div class="page" id="bonusBalPage"><div style="padding:16px 16px 30px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div style="font-size:21px;cursor:pointer;color:#9fa8c7;padding:4px" onclick="closeBonusBalPage()">←</div><div style="font-size:19px;font-weight:800">🎁 Бонусный баланс</div></div>
+
+<div class="bb-hero">
+<div class="bb-label">Бонусный баланс</div>
+<div class="bb-amount" id="bbBalVal">$0<small>.00</small></div>
+<div class="bb-stats">
+<div class="bb-stat"><div class="bb-stat-l">Заработано за все время</div><div class="bb-stat-v" style="color:#ffab40">$0</div></div>
+<div class="bb-stat"><div class="bb-stat-l">Потрачено за все время</div><div class="bb-stat-v" style="color:#ff5252">$0</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+<button class="bb-hero-btn" onclick="toggleGuide('bbUsage',this)">🎁 Как использовать бонусы? <span class="gt-arr">▾</span></button>
+<button class="bb-hero-btn" onclick="toggleGuide('bbEarn',this)">💰 Как зарабатывать бонусы? <span class="gt-arr">▾</span></button>
+</div>
+</div>
+
+<!-- Collapsible: Как использовать -->
+<div class="guide-body" id="bbUsage">
+<div style="font-size:13px;color:#9fa8c7;line-height:1.6;padding:4px 0">Бонусный баланс можно использовать для <b style="color:#e8eaf6">полной оплаты</b> покупки сервиса или пака. Частичное списание невозможно — на бонусном счёте должно быть достаточно средств для покрытия всей стоимости.</div>
+</div>
+
+<!-- Collapsible: Как зарабатывать -->
+<div class="guide-body" id="bbEarn">
+<div class="bb-info-card">
+<div class="bb-info-ico">🤝</div>
+<div class="bb-info-bd"><div class="bb-info-nm">Реферальная программа</div><div class="bb-info-ds">Приглашайте друзей и получайте от 5 до 30% от их покупок на бонусный баланс. Чем больше рефералов — тем выше ваш уровень.</div>
+<button style="display:block;width:100%;padding:11px;background:linear-gradient(135deg,#7c4dff,#b388ff);border:none;border-radius:12px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:10px" onclick="navTo('ref',document.querySelectorAll('.nitem')[3])">💸 Пригласить друга</button>
+</div>
+</div>
+<div class="bb-info-card">
+<div class="bb-info-ico">💰</div>
+<div class="bb-info-bd"><div class="bb-info-nm">Бонус за пополнение</div><div class="bb-info-ds">Пополняйте от $100 — получайте +10% бонусами. От $200 — +15% бонусами на бонусный баланс.</div></div>
+</div>
+<div class="bb-info-card">
+<div class="bb-info-ico">🏆</div>
+<div class="bb-info-bd"><div class="bb-info-nm">Достижения</div><div class="bb-info-ds">Выполняйте условия ачивок и получайте бонусы: первая покупка, месяц с нами, 3 активных сервиса и другие.</div></div>
+</div>
+<div class="bb-info-card">
+<div class="bb-info-ico">🎁</div>
+<div class="bb-info-bd"><div class="bb-info-nm">Промокоды и акции</div><div class="bb-info-ds">Следите за новостями и Stories — периодически мы раздаём промокоды с бонусами для участников клуба.</div></div>
+</div>
+</div>
+
+<!-- Mini main balance flip card (arrow left) -->
+<div class="flip-card to-main" onclick="flipToMainBal()">
+<div class="flip-card-btn">← Перейти</div>
+<div class="flip-card-bd" style="text-align:right"><div class="flip-card-label">Основной баланс</div><div class="flip-card-val" id="bbMainVal">$0.00</div></div>
+</div>
+
+<!-- History tabs -->
+<div style="font-size:15px;font-weight:700;margin-bottom:10px">История</div>
+<div class="bp-tabs">
+<div class="bp-tab on" onclick="switchBbTab(0,this)">Начисления</div>
+<div class="bp-tab" onclick="switchBbTab(1,this)">Списания</div>
+</div>
+<div id="bbTab0"><div class="tx-empty"><div style="font-size:30px;margin-bottom:6px">🎁</div><div style="font-size:14px">Начислений пока нет</div><div style="font-size:12px;margin-top:4px">Приглашайте друзей и зарабатывайте бонусы</div></div></div>
+<div id="bbTab1" style="display:none"><div class="tx-empty"><div style="font-size:30px;margin-bottom:6px">💳</div><div style="font-size:14px">Списаний пока нет</div></div></div>
+
 </div></div>
 
 <!-- ======= TOPUP SCREEN ======= -->
@@ -621,14 +761,15 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 </div>
 </div>
 
-<button class="gbtn" style="margin-top:16px" onclick="goToPayment()">Далее →</button>
+<div class="tu-terms">Нажимая «Перейти к пополнению», вы принимаете<br><a href="javascript:void(0)" onclick="openTerms('topup')">Условия использования и Политику конфиденциальности</a></div>
+<button class="gbtn" style="margin-top:10px" onclick="goToPayment()">Перейти к пополнению →</button>
 </div></div>
 
 <!-- ======= PAYMENT SCREEN ======= -->
 <div class="page" id="paymentScr"><div style="padding:16px 16px 30px">
-<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="font-size:21px;cursor:pointer;color:#9fa8c7;padding:4px" onclick="backToTopup()">←</div><div style="font-size:19px;font-weight:800">⏳ Оплата</div></div>
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="font-size:21px;cursor:pointer;color:#9fa8c7;padding:4px" onclick="backToTopup()">←</div><div style="font-size:19px;font-weight:800">⏳ Ожидание вашей транзакции</div></div>
 
-<div class="pay-warn-blue">⚠️ Отправляйте <b>точную сумму</b> указанную ниже, копируйте полное значение.<br>Ошибка в сумме = задержка зачисления.</div>
+<div class="pay-warn-blue">💸 Отправьте <b>точную сумму</b> на указанный ниже адрес, копируйте значения внимательно.<br>⚠️ Ошибка в сумме или адресе может повлечь задержку или потерю средств.</div>
 
 <div class="pay-info-block">
 <div class="pay-info-row"><span>Сумма:</span><span id="piAmt" style="color:#00e676">—</span></div>
@@ -636,30 +777,10 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <div class="pay-info-row"><span>Сеть:</span><span id="piNet">—</span></div>
 </div>
 
-<div class="pay-addr-block">
-<div class="pay-addr-label">Адрес для оплаты</div>
-<div class="pay-addr-str" id="piAddr">—</div>
-<button class="pay-copy-btn" onclick="copyAddr()">📋 Копировать адрес</button>
-</div>
-
-<div style="text-align:center;margin-bottom:14px">
-<div class="pay-qr" id="piQr">QR-код будет<br>сгенерирован<br>сервером</div>
-</div>
-
-<div class="pay-timer">
-<div class="pay-timer-val" id="piTimer">59:59</div>
-<div class="pay-timer-label">Оставшееся время на оплату</div>
-</div>
-
-<div class="pay-status">
-<span class="pay-status-dot"></span>
-<span class="pay-status-text">Ожидаем оплату...</span>
-</div>
-
-<!-- Guides -->
+<!-- Guides — сразу под инфо-блоком -->
 <div class="guide-toggle" onclick="toggleGuide('gUniv',this)">📤 Как делать перевод криптовалюты (для всех) <span class="gt-arr">▾</span></div>
 <div class="guide-body" id="gUniv">
-<div class="g-step"><div class="g-num">1</div><div class="g-txt">Нажмите <b>«Копировать адрес»</b> выше</div></div>
+<div class="g-step"><div class="g-num">1</div><div class="g-txt">Нажмите <b>«Копировать адрес»</b> ниже</div></div>
 <div class="g-step"><div class="g-num">2</div><div class="g-txt">Откройте <b>ваш кошелёк</b> (Binance, Bybit, Trust Wallet, MetaMask, @wallet и др.) → раздел <b>«Отправить»</b> или <b>«Withdraw»</b></div></div>
 <div class="g-step"><div class="g-num">3</div><div class="g-txt">Вставьте адрес → выберите <b>правильную сеть</b> (<b id="gNetAll">TON</b>) → укажите <b>точную сумму</b><div class="g-tip">💡 Обязательно проверьте что сеть совпадает! Отправка в другой сети = потеря средств.</div></div></div>
 <div class="g-step"><div class="g-num">4</div><div class="g-txt">Подтвердите → зачисление <b>1-5 минут</b> автоматически</div></div>
@@ -675,10 +796,194 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <div class="g-step"><div class="g-num">6</div><div class="g-txt">Подтвердите → зачисление <b>1-5 мин</b></div></div>
 </div>
 
+<div class="pay-addr-block">
+<div class="pay-addr-label">Адрес для оплаты</div>
+<div class="pay-addr-str" id="piAddr">—</div>
+<button class="pay-copy-btn" onclick="copyAddr()">📋 Копировать адрес</button>
+<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04)">
+<div id="piQr" style="display:inline-block;padding:6px;background:#fff;border-radius:8px;flex-shrink:0"></div>
+<div style="text-align:center">
+<div class="pay-timer-val" id="piTimer" style="font-size:22px">59:59</div>
+<div style="font-size:11px;color:#5c6688;margin-top:2px">Осталось на оплату</div>
+</div>
+</div>
+</div>
+
+<div style="font-size:12px;color:#5c6688;text-align:center;margin-bottom:14px;line-height:1.5">Перевод засчитается автоматически,<br>как только средства поступят на адрес</div>
+
+<div class="pay-status st-wait" id="payStatusBlock">
+<span class="pay-status-dot"></span>
+<span class="pay-status-text" id="payStatusText">Ожидаем оплату...</span>
+</div>
+
+<div class="guide-toggle" style="background:rgba(255,82,82,0.06);border-color:rgba(255,82,82,0.12);color:#ff8a80" onclick="toggleGuide('gProblem',this)">⚠️ Я перевёл, но платёж не засчитан <span class="gt-arr">▾</span></div>
+<div class="guide-body" id="gProblem">
+<div class="g-step"><div class="g-num">1</div><div class="g-txt">Убедитесь, что перевод <b>действительно отправлен</b> — проверьте статус в вашем кошельке</div></div>
+<div class="g-step"><div class="g-num">2</div><div class="g-txt">Проверьте <b>хеш транзакции</b> (TX Hash) и <b>адрес получателя</b> — они должны совпадать с указанными выше</div></div>
+<div class="g-step"><div class="g-num">3</div><div class="g-txt">Подождите <b>5-10 минут</b> — иногда подтверждение в сети занимает больше времени</div></div>
+<div class="g-step"><div class="g-num">4</div><div class="g-txt">Если всё верно и прошло более 15 минут — <b>напишите ассистенту</b>, приложив хеш транзакции, его можно найти в истории переводов/выводов</div></div>
+<button class="gbtn" style="margin-top:10px;font-size:14px;padding:12px" onclick="alert('Открыть чат с ассистентом')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:6px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Написать ассистенту</button>
+</div>
+
 <div class="pay-bottom-btns">
-<button class="pay-problem-btn" onclick="alert('Обратитесь в поддержку с номером платежа')">Я перевёл, но платёж не засчитан</button>
 <button class="pay-cancel-btn" onclick="cancelPayment()">Отменить платёж и вернуться</button>
 </div>
+</div></div>
+
+<!-- ======= TERMS SCREEN ======= -->
+<div class="page" id="termsScr"><div style="padding:16px 16px 30px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div style="font-size:21px;cursor:pointer;color:#9fa8c7;padding:4px" onclick="closeTerms()">←</div><div style="font-size:19px;font-weight:800">📋 Условия использования</div></div>
+
+<div class="tms-tabs">
+<button class="tms-tab on" onclick="switchTmsLang('en',this)">EN</button>
+<button class="tms-tab" onclick="switchTmsLang('ua',this)">UA</button>
+<button class="tms-tab" onclick="switchTmsLang('ru',this)">RU</button>
+</div>
+
+<!-- ENGLISH -->
+<div class="tms-lang" id="tmsEn">
+<div class="tms-date">Last updated: February 2026</div>
+
+<div class="tms-section open"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">1</span><span class="tms-sec-title">General Provisions</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">1.1</span> This Agreement governs the relationship between the LuckyAccess Club community (the "Administration") and users of the Telegram bot @LuckyAccessBot (the "User").</div>
+<div class="tms-clause"><span class="tms-clause-num">1.2</span> By using the bot, the User confirms they have read and fully accepted this Agreement.</div>
+<div class="tms-clause"><span class="tms-clause-num">1.3</span> LuckyAccess Club is a closed community providing members with access to tools and platforms via the shared LuckyAccess interface.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">2</span><span class="tms-sec-title">Membership &amp; Access</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">2.1</span> Access is granted by invitation from an active member or a confirmed LuckyAccess partner.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.2</span> Upon confirmation, a personal account and internal balance are created for the User.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.3</span> By adding funds, the User makes a voluntary contribution to the community's development. In return, the User receives temporary access to various online services and club accounts available at the time.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.4</span> The list of available tools is determined solely by the Administration and may change at any time without prior notice.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.5</span> LuckyAccess Club is not an official representative, intermediary, or partner of any external services available on the platform. All mentioned services and trademarks belong to their respective owners.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">3</span><span class="tms-sec-title">Liability &amp; Warranties</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">3.1</span> The Administration does not guarantee uninterrupted operation or permanent availability of services, as third-party platforms may change their terms, pricing, limits, security mechanisms, and policies without notice.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.2</span> LuckyAccess Club bears no responsibility for changes, blocks, updates, outages, or discontinuation of third-party services.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.3</span> All accounts and access are provided "as is". The User agrees to assume all risks associated with the use of provided access.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.4</span> The Administration is not liable for any losses related to access loss, account blocks, or technical issues.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.5</span> The User is strictly prohibited from:<div class="tms-bullet"><div class="tms-bullet-item">Sharing access credentials with third parties</div><div class="tms-bullet-item">Using club accounts for automation, mass scraping, or actions violating third-party terms</div><div class="tms-bullet-item">Reselling or commercially exploiting club access</div><div class="tms-bullet-item">Any actions that may lead to the blocking of a club account</div></div><div class="tms-warn">Violation of these rules results in immediate access termination without refund.</div></div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">4</span><span class="tms-sec-title">Privacy Policy</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">4.1</span> LuckyAccess Club respects User privacy and does not share personal data with third parties, except as required by law.</div>
+<div class="tms-clause"><span class="tms-clause-num">4.2</span> The bot collects and processes the minimum necessary information:<div class="tms-bullet"><div class="tms-bullet-item">Telegram ID, username, and interface language</div><div class="tms-bullet-item">Top-up data, bot activity, and technical logs for internal accounting</div><div class="tms-bullet-item">System device identifiers for account security</div></div></div>
+<div class="tms-clause"><span class="tms-clause-num">4.3</span> All data is used exclusively to ensure service operation, account protection, and analytics.</div>
+<div class="tms-clause"><span class="tms-clause-num">4.4</span> Data is stored for the duration of the user's participation in the Club. The User may request deletion of their data by contacting support. Account recovery after deletion is not possible.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">5</span><span class="tms-sec-title">Financial Terms</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">5.1</span> Adding funds to the internal balance is exclusively initiated by the User and constitutes a voluntary contribution to the community — not a purchase of a product or service.</div>
+<div class="tms-clause"><span class="tms-clause-num">5.2</span> All contributions are non-refundable.</div>
+<div class="tms-clause"><span class="tms-clause-num">5.3</span> The internal balance is used to obtain temporary access to services, premium accounts, and other LuckyAccess Club features.</div>
+<div class="tms-note">By topping up, you confirm understanding that the set of available tools may change, and the Administration is not liable for disruptions caused by third-party services.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">6</span><span class="tms-sec-title">Changes &amp; Contacts</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">6.1</span> The Administration reserves the right to amend this Agreement unilaterally. The current version is always available in the bot. Continued use of the bot constitutes acceptance of any changes.</div>
+<div class="tms-clause"><span class="tms-clause-num">6.2</span> For all questions regarding the platform, contact us through the Support section in the bot.</div>
+</div></div>
+
+<div class="tms-contact"><p>Questions about these terms?<br>Reach out via the bot support section.</p><a href="https://t.me/LuckyAccessBot">Open in Telegram</a></div>
+</div>
+
+<!-- UKRAINIAN -->
+<div class="tms-lang" id="tmsUa" style="display:none">
+<div class="tms-date">Останнє оновлення: лютий 2026</div>
+
+<div class="tms-section open"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">1</span><span class="tms-sec-title">Загальні положення</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">1.1</span> Ця Угода регулює відносини між спільнотою LuckyAccess Club («Адміністрація») та користувачами Telegram-бота @LuckyAccessBot («Користувач»).</div>
+<div class="tms-clause"><span class="tms-clause-num">1.2</span> Використовуючи бота, Користувач підтверджує, що ознайомився з цією Угодою та повністю приймає її умови.</div>
+<div class="tms-clause"><span class="tms-clause-num">1.3</span> LuckyAccess Club — це закрита спільнота, яка надає учасникам доступ до інструментів і платформ через спільний інтерфейс LuckyAccess.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">2</span><span class="tms-sec-title">Умови участі та доступу</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">2.1</span> Доступ надається за запрошенням чинного учасника або підтвердженого партнера LuckyAccess.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.2</span> Після підтвердження запрошення для Користувача створюється особистий акаунт та внутрішній баланс.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.3</span> Поповнення балансу є добровільним внеском у розвиток спільноти. Натомість Користувач отримує можливість тимчасового користування доступами до сервісів і клубних акаунтів, доступних на момент звернення.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.4</span> Перелік доступних інструментів визначається виключно Адміністрацією і може змінюватися будь-коли без попереднього повідомлення.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.5</span> LuckyAccess Club не є офіційним представником, посередником або партнером будь-яких зовнішніх сервісів, доступних на платформі.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">3</span><span class="tms-sec-title">Відповідальність і гарантії</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">3.1</span> Адміністрація не гарантує безперебійну роботу або постійну доступність сервісів.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.2</span> LuckyAccess Club не несе відповідальності за зміни, блокування, оновлення, збої або припинення роботи сторонніх сервісів.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.3</span> Усі акаунти та доступи надаються «як є» (as is). Користувач погоджується брати на себе всі ризики.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.4</span> Адміністрація не несе відповідальності за збитки, пов'язані з втратою доступу або технічними збоями.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.5</span> Користувачу суворо заборонено:<div class="tms-bullet"><div class="tms-bullet-item">Передавати реквізити доступу третім особам</div><div class="tms-bullet-item">Використовувати клубні акаунти для автоматизації або масового парсингу</div><div class="tms-bullet-item">Перепродавати або комерційно використовувати клубні доступи</div><div class="tms-bullet-item">Будь-які дії, що можуть призвести до блокування клубного акаунту</div></div><div class="tms-warn">Порушення цих правил призводить до негайного припинення доступу без повернення коштів.</div></div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">4</span><span class="tms-sec-title">Політика конфіденційності</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">4.1</span> LuckyAccess Club поважає право Користувачів на конфіденційність і не передає персональні дані третім особам.</div>
+<div class="tms-clause"><span class="tms-clause-num">4.2</span> Бот збирає мінімально необхідну інформацію:<div class="tms-bullet"><div class="tms-bullet-item">Telegram ID, username та мова інтерфейсу</div><div class="tms-bullet-item">Дані про поповнення та технічні логи</div><div class="tms-bullet-item">Системні ідентифікатори пристроїв для захисту акаунту</div></div></div>
+<div class="tms-clause"><span class="tms-clause-num">4.3</span> Усі дані використовуються виключно для забезпечення роботи сервісу.</div>
+<div class="tms-clause"><span class="tms-clause-num">4.4</span> Користувач може запросити видалення своїх даних через підтримку. Відновлення акаунту після видалення неможливе.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">5</span><span class="tms-sec-title">Фінансові умови</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">5.1</span> Поповнення балансу є добровільним внеском, а не покупкою товару або послуги.</div>
+<div class="tms-clause"><span class="tms-clause-num">5.2</span> Повернення внесених коштів не здійснюється.</div>
+<div class="tms-clause"><span class="tms-clause-num">5.3</span> Внутрішній баланс використовується для отримання тимчасового доступу до сервісів.</div>
+<div class="tms-note">Поповнюючи баланс, ви підтверджуєте розуміння того, що перелік інструментів може змінюватися.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">6</span><span class="tms-sec-title">Зміни та контакти</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">6.1</span> Адміністрація залишає за собою право вносити зміни до цієї Угоди в односторонньому порядку.</div>
+<div class="tms-clause"><span class="tms-clause-num">6.2</span> З усіх питань звертайтесь через розділ «Підтримка» в боті.</div>
+</div></div>
+
+<div class="tms-contact"><p>Маєте питання?<br>Зверніться через підтримку.</p><a href="https://t.me/LuckyAccessBot">Відкрити в Telegram</a></div>
+</div>
+
+<!-- RUSSIAN -->
+<div class="tms-lang" id="tmsRu" style="display:none">
+<div class="tms-date">Последнее обновление: февраль 2026</div>
+
+<div class="tms-section open"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">1</span><span class="tms-sec-title">Общие положения</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">1.1</span> Настоящее Соглашение регулирует отношения между сообществом LuckyAccess Club («Администрация») и пользователями Telegram-бота @LuckyAccessBot («Пользователь»).</div>
+<div class="tms-clause"><span class="tms-clause-num">1.2</span> Используя бот, Пользователь подтверждает, что ознакомился с настоящим Соглашением и принимает его условия.</div>
+<div class="tms-clause"><span class="tms-clause-num">1.3</span> LuckyAccess Club — это закрытое сообщество, предоставляющее участникам доступ к инструментам и платформам через общий интерфейс LuckyAccess.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">2</span><span class="tms-sec-title">Условия участия и доступа</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">2.1</span> Доступ предоставляется по приглашению действующего участника или подтверждённого партнёра LuckyAccess.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.2</span> После подтверждения инвайта Пользователю создаётся личный аккаунт и внутренний баланс.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.3</span> Пополнение баланса является добровольным вкладом в развитие сообщества. В обмен Пользователь получает возможность временного пользования доступами к сервисам.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.4</span> Перечень доступных инструментов определяется исключительно Администрацией и может изменяться без предварительного уведомления.</div>
+<div class="tms-clause"><span class="tms-clause-num">2.5</span> LuckyAccess Club не является официальным представителем, посредником или партнёром каких-либо внешних сервисов. Все упомянутые сервисы и товарные знаки принадлежат их правообладателям.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">3</span><span class="tms-sec-title">Ответственность и гарантии</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">3.1</span> Администрация не гарантирует бесперебойную работу или постоянную доступность сервисов.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.2</span> LuckyAccess Club не несёт ответственности за изменения, блокировки, обновления, сбои или прекращение работы сторонних сервисов.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.3</span> Все аккаунты и доступы предоставляются «как есть» (as is). Пользователь соглашается принять на себя все риски.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.4</span> Администрация не несёт ответственности за убытки, связанные с потерей доступа или техническими сбоями.</div>
+<div class="tms-clause"><span class="tms-clause-num">3.5</span> Пользователю категорически запрещается:<div class="tms-bullet"><div class="tms-bullet-item">Передавать реквизиты доступа третьим лицам</div><div class="tms-bullet-item">Использовать клубные аккаунты для автоматизации или массового парсинга</div><div class="tms-bullet-item">Перепродавать или коммерчески использовать клубные доступы</div><div class="tms-bullet-item">Любые действия, способные привести к блокировке клубного аккаунта</div></div><div class="tms-warn">Нарушение этих правил влечёт немедленную блокировку доступа без возврата средств.</div></div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">4</span><span class="tms-sec-title">Политика конфиденциальности</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">4.1</span> LuckyAccess Club уважает право Пользователей на конфиденциальность и не передаёт персональные данные третьим лицам.</div>
+<div class="tms-clause"><span class="tms-clause-num">4.2</span> Бот собирает минимально необходимую информацию:<div class="tms-bullet"><div class="tms-bullet-item">Telegram ID, username и язык интерфейса</div><div class="tms-bullet-item">Данные о пополнениях и технические логи для внутреннего учёта</div><div class="tms-bullet-item">Системные идентификаторы устройств для защиты аккаунта</div></div></div>
+<div class="tms-clause"><span class="tms-clause-num">4.3</span> Все данные используются исключительно для обеспечения работы сервиса, защиты аккаунтов и аналитики.</div>
+<div class="tms-clause"><span class="tms-clause-num">4.4</span> Пользователь может запросить удаление своих данных через поддержку. Восстановление аккаунта после удаления невозможно.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">5</span><span class="tms-sec-title">Финансовые условия</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">5.1</span> Пополнение баланса является добровольным вкладом в развитие сообщества, а не покупкой товара или услуги.</div>
+<div class="tms-clause"><span class="tms-clause-num">5.2</span> Возврат внесённых средств не осуществляется.</div>
+<div class="tms-clause"><span class="tms-clause-num">5.3</span> Внутренний баланс используется для получения временного доступа к сервисам и другим функциям LuckyAccess Club.</div>
+<div class="tms-note">Пополняя баланс, вы подтверждаете понимание того, что перечень инструментов может изменяться, а Администрация не несёт ответственности за перебои со стороны сторонних сервисов.</div>
+</div></div>
+
+<div class="tms-section"><div class="tms-sec-hdr" onclick="togTmsS(this)"><span class="tms-sec-num">6</span><span class="tms-sec-title">Изменения и контакты</span><svg class="tms-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div><div class="tms-sec-body">
+<div class="tms-clause"><span class="tms-clause-num">6.1</span> Администрация оставляет за собой право вносить изменения в настоящее Соглашение в одностороннем порядке.</div>
+<div class="tms-clause"><span class="tms-clause-num">6.2</span> По всем вопросам обращайтесь через раздел «Поддержка» в боте.</div>
+</div></div>
+
+<div class="tms-contact"><p>Есть вопросы по соглашению?<br>Напишите через раздел поддержки.</p><a href="https://t.me/LuckyAccessBot">Открыть в Telegram</a></div>
+</div>
+
 </div></div>
 
 <div class="page" id="supportScr"><div style="padding:16px 16px 30px"><div class="inner-hdr"><div class="inner-bk" onclick="closeInner('support')">←</div><div class="inner-tt">💬 Поддержка</div></div>
@@ -836,17 +1141,16 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <button class="gbtn gbtn-o" style="font-size:14px;padding:10px" onclick="alert('Токен сброшен')">🔄 Сбросить токен</button>
 <div style="font-size:16px;font-weight:700;text-align:center;margin:16px 0 10px;color:#fff">Следуйте простым правилам:</div>
 <div style="font-size:14px;line-height:1.7">
-<span style="color:#ff5252">❗ Делитесь токеном только с доверенными людьми или в закрытых чатах.</span><br><br>
-<span style="color:#ff5252">🚫 Публикация токена в открытом доступе запрещена.</span><br><br>
+<span style="color:#e8eaf6">🫶 Делитесь ссылкой и токеном только с доверенными людьми или в закрытых чатах.</span><br><br>
 <span style="color:#e8eaf6">🔄 При утечке обязательно сгенерируйте новый токен по кнопке выше.</span><br><br>
-<span style="color:#e8eaf6">⚠️ Умышленное распространение в открытых источниках приведёт к блокировке доступа к сообществу.</span>
+<span style="color:#ff5252">🚫 Публикация токена в открытом доступе запрещена. Умышленное распространение в открытых источниках приведёт к блокировке доступа к LuckyAccess Club.</span>
 </div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
 <div style="background:#1a2540;border-radius:10px;padding:10px;text-align:center"><div style="font-size:11px;color:#5c6688;font-weight:600;margin-bottom:2px">Рефералов</div><div style="font-size:19px;font-weight:800">0</div></div>
 <div style="background:#1a2540;border-radius:10px;padding:10px;text-align:center"><div style="font-size:11px;color:#5c6688;font-weight:600;margin-bottom:2px">Бонусный баланс</div><div style="font-size:19px;font-weight:800;color:#ffab40">$0.00</div></div>
 </div>
-<button style="display:block;width:100%;padding:12px;background:rgba(255,171,64,0.08);border:1px solid rgba(255,171,64,0.15);border-radius:14px;color:#ffab40;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;margin-bottom:8px" onclick="openBalancePage()">Бонусный баланс с историей</button>
+<button style="display:block;width:100%;padding:12px;background:rgba(255,171,64,0.08);border:1px solid rgba(255,171,64,0.15);border-radius:14px;color:#ffab40;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;margin-bottom:8px" onclick="openBonusBalPage()">Бонусный баланс с историей</button>
 <div style="font-size:12px;color:#ffab40;line-height:1.4;text-align:center">*Рефералы засчитываются сразу после первого пополнения личного баланса</div>
 </div>
 
@@ -1021,7 +1325,7 @@ var tX=0;document.getElementById("promo").addEventListener("touchstart",function
 
 function navTo(page,el){
   var ns=document.querySelectorAll(".nitem");for(var i=0;i<ns.length;i++)ns[i].classList.remove("on");if(el)el.classList.add("on");
-  var all=["menuPage","cabPage","appPage","refPage","subsScr","supportScr","newsScr","faqScr","suggestScr","rateScr","balancePage","topupScr","paymentScr","partnersScr"];
+  var all=["menuPage","cabPage","appPage","refPage","subsScr","supportScr","newsScr","faqScr","suggestScr","rateScr","balancePage","topupScr","paymentScr","partnersScr","termsScr","bonusBalPage"];
   for(var i=0;i<all.length;i++){var e=document.getElementById(all[i]);if(e)e.classList.remove("on");}
   document.getElementById(page+"Page").classList.add("on");
 }
@@ -1034,12 +1338,11 @@ var USDC_ICO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rht
 (function(){
   var imgs=document.querySelectorAll("#usdtIcon1,#usdtIcon2");for(var i=0;i<imgs.length;i++)imgs[i].src=USDT_ICO;
   var imgs2=document.querySelectorAll("#usdcIcon1");for(var i=0;i<imgs2.length;i++)imgs2[i].src=USDC_ICO;
-  var bonIco=document.getElementById("bonusIcoCab");if(bonIco)bonIco.src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAE3UlEQVR42u2YW4hVZRTHf+vMjDqjNoZYGSakUBpdMaOyiIKKgi5YhFFRkdFDURB0MUIq66GHslLqJe02aRAU2UMXMekidCUwybK7FEkTmo5mOnPm14Nr0+Z0nHMmm8mHPtjs23f57/9a67/Wt2GYmhpqDHZcDCUgoJJrGBFV9vemHjxYFluHEMxY4FjgNOB04DigEzgZ+FytRET/cPlWq1op2FFHq9+6p21S31SXqbvUQ7JP5b8wYUVtSdALEuCx+e4KdeNg56zsI3OVvH5MPSlNFnnMBL4EvsshZwMbsn/LsJg1r59KpraoU/LZq2qP2qFepq5Vv1IX5PvWoQbYkueFCW6G+pr6vfq0uludqJ6Z73/I84VDDrDE3LxcdFbp3Yf5bLp6VF4/oLbnxxxS0sghZe6cXPx8tVP9JQG3qUeqh6l96pP/RYR2qtMS5Eh1o7ouAV+XbP2mvlJ8VI5tHUrmKiWQ69XD8369+lmCuK4ULG9n38qQgapj1inqEeoxydw7yd64kkDfpb6vdgyLGJfAHa72qnfm/YqUkcl5P6JW20qmHdTxT8w6IYPg9bxfrHarE4eDpRgAnEAH8CnQExEz1PnAvcBvwNfAVuAC4GGgK/s/BPQ3maX6S8dW4K6I+KBcSLTWyxIR0Z96txpoTXA3J7jHgR6gHeiOiJ3qRwl4JLCqSYABjM0xVeDyrHo+yLF/B5jOHuooYBkwCZiqzgEeBa7K59fkxJGsbslnAl818p48dgMvR8SWXHtaM/VgJSKq6hnAxcCsrOOWA7dGRJd6C/AI8CvQAvTluajt2mpcp1qHuV5gQjJ2bRLT3rDCLyoUdZT6YgZHn/pzSsvtmWfv+xcU4rLUzQdTqj5Wb2+Yq0uaNlJdmVlirXpWTrg4P6CtKFRrxs3M4vQl9dx6ubfU98acc7b6ljqvqWKiLB3qceqGFOjNDQqIc3PBT9Q1eX19bQ1Y3uFlBXSluqoewIGieBIwFzgemArcAxyoLgG2paP/AXRFxOcJ4AlgSUTMzbluAxapy4EdBdBih5dj2nKu5veu6oG5p9iSbLynfpo5dm3J7D+q29XJ6tjMNken+UeoB6g71VNy/i51m3pUac2fcjvQFIMtEdGnXgSMj4jOJj7qC+AG4O58dGRErCtJxyjgl3z3DLAG+KnZurC1jkaRQhxZwv9cbL5rpCKA0Qngj4hQXQo8q/alSZcCKyPim8wOK4GVJVdSrQ4m9AsTt2RgmEXBjjpHT77frh6UZh2jvuBfbXVu1guTj0gFGJHrjVO3DiZIigA5HjgImA98m6mnlkGB8cAC4ISIeCMFeI56dabIHQP9ZQA+TKFfn5nJhpkkM8KpQG9ELGiC9UuB+9Pxi4jcueeV7TWuU6zRC1ya/U6MiO78E1FtBLBIV6uAe9VFDRicAExP2bmjxj/Zi3yYQHozfXbvJSXWD5KMrG+AzcBNwKbMtbUA+4FxeT0b6K4TTI2qmd5kvi9zcX8jgIXMXJLsjI+IzQOYtx14F3j7X6pPdzT7dyuStd0NJtyV/RYCz+V8g/0PWFjj+WRxQIDVNPGK9KnN6qYBfHAcMAY4FDhvAL9rBLAvfbm/YclfEtDOrHI76/Q176sZiR37+K9R4PcsYDcWGBqWXPtDiwYgW4YZT3VA5v5v/6D9CQL3JUAiYkVDAAAAAElFTkSuQmCC";
 })();
 
 /* === Balance page === */
 function openBalancePage(){
-  var all=["menuPage","cabPage","appPage","refPage","topupScr","paymentScr","balancePage","partnersScr"];
+  var all=["menuPage","cabPage","appPage","refPage","topupScr","paymentScr","balancePage","partnersScr","termsScr","bonusBalPage"];
   for(var i=0;i<all.length;i++){var e=document.getElementById(all[i]);if(e)e.classList.remove("on");}
   document.getElementById("balancePage").classList.add("on");
 }
@@ -1053,12 +1356,32 @@ function switchBpTab(idx,el){
   document.getElementById("bpTab1").style.display=idx===1?"block":"none";
 }
 
+/* === Bonus Balance Page === */
+function openBonusBalPage(){
+  var all=["menuPage","cabPage","appPage","refPage","topupScr","paymentScr","balancePage","partnersScr","termsScr","bonusBalPage"];
+  for(var i=0;i<all.length;i++){var e=document.getElementById(all[i]);if(e)e.classList.remove("on");}
+  document.getElementById("bonusBalPage").classList.add("on");
+}
+function closeBonusBalPage(){
+  document.getElementById("bonusBalPage").classList.remove("on");
+  document.getElementById("cabPage").classList.add("on");
+}
+function flipToMainBal(){
+  document.getElementById("bonusBalPage").classList.remove("on");
+  document.getElementById("balancePage").classList.add("on");
+}
+function switchBbTab(idx,el){
+  var tabs=el.parentElement.querySelectorAll(".bp-tab");for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("on");el.classList.add("on");
+  document.getElementById("bbTab0").style.display=idx===0?"block":"none";
+  document.getElementById("bbTab1").style.display=idx===1?"block":"none";
+}
+
 /* === Topup === */
 var selCoin="usdt_ton";
 var payTimerInt=null;
 
 function openTopup(){
-  var all=["menuPage","cabPage","appPage","refPage","topupScr","paymentScr","balancePage","partnersScr"];
+  var all=["menuPage","cabPage","appPage","refPage","topupScr","paymentScr","balancePage","partnersScr","termsScr","bonusBalPage"];
   for(var i=0;i<all.length;i++){var e=document.getElementById(all[i]);if(e)e.classList.remove("on");}
   document.getElementById("topupScr").classList.add("on");
 }
@@ -1066,6 +1389,7 @@ function closeTopup(){
   document.getElementById("topupScr").classList.remove("on");
   document.getElementById("balancePage").classList.add("on");
   if(payTimerInt)clearInterval(payTimerInt);
+  stopPolling();curPaymentId=null;
 }
 function setPayAmt(v,el){
   document.getElementById("payAmtInp").value=v;
@@ -1100,43 +1424,251 @@ function backToTopup(){
   document.getElementById("paymentScr").classList.remove("on");
   document.getElementById("topupScr").classList.add("on");
   if(payTimerInt)clearInterval(payTimerInt);
+  stopPolling();curPaymentId=null;
 }
 function cancelPayment(){
   document.getElementById("paymentScr").classList.remove("on");
   document.getElementById("balancePage").classList.add("on");
   if(payTimerInt)clearInterval(payTimerInt);
+  stopPolling();curPaymentId=null;
 }
+/* === NowPayments API Config === */
+var API_BASE=""; /* ← ВСТАВЬ URL своего Laravel: https://yourdomain.com/api */
+var curPaymentId=null;
+var payPollInt=null;
+var payQrObj=null;
+
+/* Маппинг selCoin → NowPayments pay_currency */
+var COIN_MAP={
+  usdt_ton:"usdtton",
+  usdt_trc20:"usdttrc20",
+  usdc_ton:"usdcton"
+};
+var COIN_LABELS={
+  usdt_ton:{coin:"USDT",net:"TON"},
+  usdt_trc20:{coin:"USDT",net:"TRC-20"},
+  usdc_ton:{coin:"USDC",net:"TON"}
+};
+
 function startPayment(amt){
-  var parts=selCoin.split("_");
-  var coin=parts[0].toUpperCase();var net=parts[1]||"ton";
-  var netNames={ton:"TON",trc20:"TRC-20"};var netLabel=netNames[net]||net;
-  var suffix=Math.floor(Math.random()*49)+1;
-  var cryptoAmt=(amt+suffix/1000).toFixed(3);
-  document.getElementById("piAmt").textContent=cryptoAmt+" "+coin;
-  document.getElementById("piCoin").textContent=coin;
-  document.getElementById("piNet").textContent=netLabel;
-  var addrs={ton:"EQBx2R4f5kLp9mT8hG7vN3dC1qY6wS0bZ8jKm4a",trc20:"TJfK8x2nQ9vR3mP5wL7bY1dC4hZ6gS0eN8kA"};
-  document.getElementById("piAddr").textContent=addrs[net]||addrs.ton;
-  document.getElementById("gNetAll").textContent=netLabel;
-  document.getElementById("gWCoin").textContent=coin;
-  document.getElementById("gWNet").textContent=netLabel;
-  var sec=3600;
+  var labels=COIN_LABELS[selCoin]||{coin:"USDT",net:"TON"};
+  /* Показываем экран с лоадером */
+  document.getElementById("piAmt").textContent="...";
+  document.getElementById("piCoin").textContent=labels.coin;
+  document.getElementById("piNet").textContent=labels.net;
+  document.getElementById("piAddr").textContent="Загрузка...";
+  document.getElementById("gNetAll").textContent=labels.net;
+  document.getElementById("gWCoin").textContent=labels.coin;
+  document.getElementById("gWNet").textContent=labels.net;
+  setPayStatus("wait","Создаём платёж...");
+  /* Очистить QR */
+  var qrEl=document.getElementById("piQr");
+  qrEl.innerHTML="";
+  payQrObj=null;
+
+  /* Если API не настроен — demo-режим */
+  if(!API_BASE){
+    startPaymentDemo(amt,labels);
+    return;
+  }
+
+  /* Реальный вызов Laravel API */
+  var payCurrency=COIN_MAP[selCoin]||"usdtton";
+  var body=JSON.stringify({
+    amount_usd:amt,
+    pay_currency:payCurrency
+  });
+
+  fetch(API_BASE+"/payment/create",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:body
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.success){
+      setPayStatus("fail",data.error||"Ошибка создания платежа");
+      return;
+    }
+    curPaymentId=data.payment_id;
+    var cryptoAmt=parseFloat(data.amount_crypto).toFixed(6);
+    /* Убираем незначащие нули: 25.000000 → 25.0 но 25.017000 → 25.017 */
+    cryptoAmt=cryptoAmt.replace(/0+$/,"").replace(/\.$/,".0");
+
+    document.getElementById("piAmt").textContent=cryptoAmt+" "+labels.coin;
+    document.getElementById("piAddr").textContent=data.deposit_address;
+    generateQR(data.deposit_address);
+    setPayStatus("wait","Ожидаем оплату...");
+    startTimer(data.expires_in||3600);
+    startPolling(data.payment_id);
+  })
+  .catch(function(err){
+    setPayStatus("fail","Ошибка сети. Попробуйте позже.");
+  });
+}
+
+/* Demo-режим — полная имитация NowPayments */
+function startPaymentDemo(amt,labels){
+  var demoAddrs={
+    usdt_ton:"UQBIhEGUvHwsEb5Q2p4t_j3ov7kR8wMDYz0N1UGkaZiL",
+    usdt_trc20:"TLa2f6vPb3ex3MG8g6dkFNQJSHxiLhW7NR",
+    usdc_ton:"UQCo9R4f5kLp2mT8hK7vN3dC1qY6wS0bZ8jVm4aXqPn"
+  };
+  var addr=demoAddrs[selCoin]||demoAddrs.usdt_ton;
+  var cryptoAmt=parseFloat(amt).toFixed(2);
+
+  document.getElementById("piAmt").textContent=cryptoAmt+" "+labels.coin;
+  document.getElementById("piAddr").textContent=addr;
+  generateQR(addr);
+  setPayStatus("wait","Ожидаем оплату...");
+  startTimer(3600);
+
+  /* Имитация прохождения статусов */
+  if(window._demoSt1)clearTimeout(window._demoSt1);
+  if(window._demoSt2)clearTimeout(window._demoSt2);
+  if(window._demoSt3)clearTimeout(window._demoSt3);
+  window._demoSt1=setTimeout(function(){
+    setPayStatus("confirm","Транзакция обнаружена, подтверждаем...");
+  },15000);
+  window._demoSt2=setTimeout(function(){
+    setPayStatus("confirm","Подтверждено, зачисляем...");
+  },22000);
+  window._demoSt3=setTimeout(function(){
+    setPayStatus("done","Оплата зачислена! \u2705");
+    if(payTimerInt)clearInterval(payTimerInt);
+    var newBal=parseFloat(amt).toFixed(2);
+    document.querySelector(".hdr-bal").textContent="$"+newBal;
+    var cabBal=document.getElementById("cabMainBal");
+    if(cabBal)cabBal.textContent="$"+newBal;
+  },28000);
+}
+
+/* QR генерация */
+function generateQR(addr){
+  var qrEl=document.getElementById("piQr");
+  qrEl.innerHTML="";
+  if(typeof QRCode!=="undefined"){
+    payQrObj=new QRCode(qrEl,{
+      text:addr,
+      width:110,
+      height:110,
+      colorDark:"#000000",
+      colorLight:"#ffffff",
+      correctLevel:QRCode.CorrectLevel.M
+    });
+  } else {
+    qrEl.innerHTML="<div style='padding:20px;font-size:11px;color:#999'>QR недоступен</div>";
+  }
+}
+
+/* Статус платежа */
+function setPayStatus(state,text){
+  var block=document.getElementById("payStatusBlock");
+  var txt=document.getElementById("payStatusText");
+  block.className="pay-status st-"+state;
+  txt.textContent=text;
+}
+
+/* Таймер */
+function startTimer(sec){
   if(payTimerInt)clearInterval(payTimerInt);
   payTimerInt=setInterval(function(){
-    sec--;if(sec<=0){clearInterval(payTimerInt);document.getElementById("piTimer").textContent="00:00";return;}
+    sec--;
+    if(sec<=0){
+      clearInterval(payTimerInt);
+      document.getElementById("piTimer").textContent="00:00";
+      if(curPaymentId)setPayStatus("expired","Время вышло");
+      stopPolling();
+      return;
+    }
     var m=Math.floor(sec/60);var s=sec%60;
     document.getElementById("piTimer").textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
   },1000);
 }
+
+/* Поллинг статуса */
+function startPolling(paymentId){
+  stopPolling();
+  if(!API_BASE)return;
+  payPollInt=setInterval(function(){
+    fetch(API_BASE+"/payment/status/"+paymentId)
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data.success)return;
+      var st=data.status;
+      if(st==="confirming"){
+        setPayStatus("confirm","Транзакция обнаружена, подтверждаем...");
+      } else if(st==="confirmed"||st==="sending"){
+        setPayStatus("confirm","Подтверждено, зачисляем...");
+      } else if(st==="finished"||st==="completed"){
+        setPayStatus("done","Оплата зачислена! ✅");
+        stopPolling();
+        if(payTimerInt)clearInterval(payTimerInt);
+        /* Обновить баланс в UI если сервер вернул */
+        if(data.new_balance!==undefined){
+          var balStr="$"+parseFloat(data.new_balance).toFixed(2);
+          document.querySelector(".hdr-bal").textContent=balStr;
+          var cabBal=document.getElementById("cabMainBal");
+          if(cabBal)cabBal.textContent=balStr;
+        }
+      } else if(st==="failed"||st==="refunded"){
+        setPayStatus("fail","Ошибка платежа");
+        stopPolling();
+      } else if(st==="expired"){
+        setPayStatus("expired","Время вышло");
+        stopPolling();
+        if(payTimerInt)clearInterval(payTimerInt);
+        document.getElementById("piTimer").textContent="00:00";
+      }
+    })
+    .catch(function(){});
+  },5000);
+}
+function stopPolling(){
+  if(payPollInt){clearInterval(payPollInt);payPollInt=null;}
+  if(window._demoSt1){clearTimeout(window._demoSt1);window._demoSt1=null;}
+  if(window._demoSt2){clearTimeout(window._demoSt2);window._demoSt2=null;}
+  if(window._demoSt3){clearTimeout(window._demoSt3);window._demoSt3=null;}
+}
+
 function copyAddr(){
   var addr=document.getElementById("piAddr").textContent;
+  if(addr==="Загрузка..."||addr==="\u2014")return;
   if(navigator.clipboard){
     navigator.clipboard.writeText(addr).then(function(){
       var btn=document.querySelector(".pay-copy-btn");
-      btn.innerHTML="✅ Скопировано!";
-      setTimeout(function(){btn.innerHTML="📋 Копировать адрес";},2000);
+      btn.innerHTML="\u2705 \u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u043E!";
+      setTimeout(function(){btn.innerHTML="\uD83D\uDCCB \u041A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0430\u0434\u0440\u0435\u0441";},2000);
     });
-  } else {alert("Адрес: "+addr);}
+  } else {alert("\u0410\u0434\u0440\u0435\u0441: "+addr);}
+}
+
+/* === Terms === */
+var termsReturnTo="cab"; /* откуда открыли: cab или topup */
+function openTerms(from){
+  termsReturnTo=from||"cab";
+  var all=["menuPage","cabPage","appPage","refPage","topupScr","paymentScr","balancePage","partnersScr","termsScr","bonusBalPage"];
+  for(var i=0;i<all.length;i++){var e=document.getElementById(all[i]);if(e)e.classList.remove("on");}
+  document.getElementById("termsScr").classList.add("on");
+  window.scrollTo(0,0);
+}
+function closeTerms(){
+  document.getElementById("termsScr").classList.remove("on");
+  if(termsReturnTo==="topup"){document.getElementById("topupScr").classList.add("on");}
+  else{document.getElementById("cabPage").classList.add("on");}
+}
+function switchTmsLang(lang,el){
+  var tabs=document.querySelectorAll(".tms-tab");
+  for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("on");
+  el.classList.add("on");
+  var ids=["tmsEn","tmsUa","tmsRu"];
+  for(var i=0;i<ids.length;i++)document.getElementById(ids[i]).style.display="none";
+  var map={en:"tmsEn",ua:"tmsUa",ru:"tmsRu"};
+  document.getElementById(map[lang]).style.display="block";
+}
+function togTmsS(hdr){
+  var sec=hdr.parentElement;
+  sec.classList.toggle("open");
 }
 
 function toggleInviteBlock(){
