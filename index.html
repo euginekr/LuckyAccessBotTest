@@ -560,13 +560,11 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 
 <div class="page" id="cabPage"><div style="padding:16px">
 
-<!-- Language top-right -->
-<div style="display:flex;justify-content:flex-end;margin-bottom:-4px"><div onclick="alert('EN / UA / RU')" style="cursor:pointer;font-size:12px;color:#5c6688;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:4px 10px;font-weight:600;display:flex;align-items:center;gap:4px">🌐 <span style="font-size:11px">language</span></div></div>
-
 <!-- Profile horizontal -->
-<div class="cab-prof">
+<div class="cab-prof" style="position:relative">
 <div class="cab-prof-av"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='48' cy='48' r='48' fill='%231b5e20'/%3E%3Ctext x='48' y='56' text-anchor='middle' fill='white' font-size='32' font-family='Arial' font-weight='bold'%3EEL%3C/text%3E%3C/svg%3E" alt=""></div>
 <div class="cab-prof-bd"><div class="cab-prof-welcome">Welcome to the club</div><div class="cab-prof-name">Eugene</div><div class="cab-prof-nick">@EugeneLucky</div></div>
+<div onclick="alert('EN / UA / RU')" style="cursor:pointer;font-size:12px;color:#5c6688;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:4px 10px;font-weight:600;display:flex;align-items:center;gap:4px;position:absolute;top:8px;right:0">🌐 <span style="font-size:11px;text-transform:uppercase">language</span></div>
 </div>
 
 <!-- Balance cards -->
@@ -655,6 +653,7 @@ body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <div class="bb-stats">
 <div class="bb-stat"><div class="bb-stat-l">Заработано за все время</div><div class="bb-stat-v" style="color:#ffab40">$0</div></div>
 <div class="bb-stat"><div class="bb-stat-l">Потрачено за все время</div><div class="bb-stat-v" style="color:#ff5252">$0</div></div>
+<div class="bb-stat"><div class="bb-stat-l">Привлечено участников</div><div class="bb-stat-v" style="color:#b388ff">0</div></div>
 </div>
 <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
 <button class="bb-hero-btn" onclick="toggleGuide('bbUsage',this)">🎁 Как использовать бонусы? <span class="gt-arr">▾</span></button>
